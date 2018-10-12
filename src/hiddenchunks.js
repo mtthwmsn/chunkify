@@ -15,6 +15,7 @@
     w.el = el;
     w.word = (w.el.dataset.map||w.el.innerHTML).trim();
     w.map = {};
+    w.showHiddenChunks;
     // ensure word has been provided
     if (! w.word.length) return;
     // create a new event for `change` of progress bar
@@ -31,19 +32,18 @@
     /**
      * present() shows or hides hidden chunks depending on value of `showHidden`
      *
-     * @param showHidden bool
+     * @param showHiddenChunks bool
      * @return void
      */
-    function present(showHidden) {
+    function present(showHiddenChunks) {
+      if (showHiddenChunks === w.showHiddenChunks) return;
+      w.showHiddenChunks = showHiddenChunks;
       for (let i in w.map) if (w.map[ i ].hide === true) {
-        if (showHidden === true) {
+        w.map[ i ].isHidden = !w.showHiddenChunks;
+        if (w.showHiddenChunks === true)
           w.map[ i ].el.classList.remove("hiddenchunks__chunk--hidden");
-          w.map[ i ].isHidden = false;
-        }
-        else {
+        else
           w.map[ i ].el.classList.add("hiddenchunks__chunk--hidden");
-          w.map[ i ].isHidden = true;
-        }
       }
       w.el.dispatchEvent(w.onChange);
     }
