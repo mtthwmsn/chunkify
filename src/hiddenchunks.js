@@ -4,6 +4,13 @@
   let words = Array.from(document.getElementsByClassName("hiddenchunks"));
   words.forEach(word => new HiddenChunks(word));
 
+
+  /**
+   * HiddenChunks() is the main constructor method
+   *
+   * @param object el
+   * @return bool false if `data-map` is not defined
+   */
   function HiddenChunks(el) {
     var w = {};
     w.el = el;
@@ -16,17 +23,32 @@
     }
     mapWord();
     generateWord();
+    // bind and expose methods to the word
+    //   usage: `document.getElementById('hiddenchunks').show();`
+    w.el.show = __show.bind(w.el);
+    w.el.hide = __hide.bind(w.el);
+
+
+    function __show() {
+      console.log('show', w.map);
+    }
+
+    function __hide() {
+      console.log('hide', w.map);
+    }
 
     function generateWord() {
       w.el.innerHTML = "";
       for (let i in w.map) {
-        w.el.append(generateChunk(w.map[ i ].chunk, w.map[ i ].hidden));
+        let chunk = generateChunk(w.map[ i ].chunk, w.map[ i ].hide);
+        w.map[ i ].el = chunk;
+        w.el.append(chunk);
       }
     }
 
-    function generateChunk(chunk, hidden) {
+    function generateChunk(chunk, hide) {
       let span = document.createElement("SPAN");
-      span.className = "wordart__char"+(hidden ? " wordart__char--hidden": "");
+      span.className = "wordart__char"+(hide ? " wordart__char--hidden": "");
       span.innerHTML = (chunk === " " ? "&nbsp;" : chunk);
       return span;
     }
@@ -43,7 +65,7 @@
         let chunk = w.word.substring(sliceMap[0], sliceMap[1]);
         w.map[ Object.keys(w.map).length ] = {
           "chunk": chunk.replace(/\[|\]/g, ""),
-          "hidden": !!chunk.match(/\[|\]/g)
+          "hide": !!chunk.match(/\[|\]/g)
         };
         sliceMap.shift();
       }
