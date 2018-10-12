@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Hidden Chunks</title>
+	<style>
+		body {
+			background: #EFEFEF;
+		}
+		.progressbar {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+		}
+		.progressbar__item {
+			background: #f99;
+		}
+		.progressbar__item[data-active] {
+			background: #F00;
+		}
+	</style>
+</head>
+<body>
+
+	<h1 class="hiddenchunks" id="hiddenchunks" data-map="H[i]dd[e]n[ ]Ch[u]nks">...</h1>
+	<button id="show">Show</button>
+	<button id="hide">Hide</button>
+
+	<script src="../src/hiddenchunks.js"></script>
+	<script>
+		var hiddenchunks = document.getElementById("hiddenchunks");
+		document.getElementById('show').addEventListener('click', hiddenchunks.show);
+		document.getElementById('hide').addEventListener('click', hiddenchunks.hide);
+	</script>
+</body>
+</html>
