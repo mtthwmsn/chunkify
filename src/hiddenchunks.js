@@ -82,7 +82,7 @@
     function initWord() {
       w.el.innerHTML = "";
       for (let i in w.map) {
-        let chunk = generateChunk(w.map[ i ].chunk);
+        let chunk = generateChunk(i);
         w.map[ i ].el = chunk;
         w.el.append(chunk);
       }
@@ -93,13 +93,13 @@
     /**
      * generateChunk() generates HTML for each chunk
      *
-     * @param object chunk
+     * @param int i - the index of the chunk in the map
      * @return object span
      */
-    function generateChunk(chunk) {
+    function generateChunk(i) {
       let span = document.createElement("SPAN");
-      span.className = "hiddenchunks__chunk";
-      span.innerHTML = (chunk === " " ? "&nbsp;" : chunk);
+      span.className = "hiddenchunks__chunk hiddenchunks__chunk-index-"+i;
+      span.innerHTML = (w.map[ i ].chunk === " " ? "&nbsp;" : w.map[ i ].chunk);
       return span;
     }
 
