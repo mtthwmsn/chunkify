@@ -14,13 +14,10 @@
   function HiddenChunks(el) {
     var w = {};
     w.el = el;
-    w.word = w.el.dataset.map||null;
+    w.word = (w.el.dataset.map||w.el.innerHTML).trim();
     w.map = {};
     // ensure word has been provided
-    if (w.word === null) {
-      console.warn("HiddenChunks: `data-map` must be provided");
-      return;
-    }
+    if (! w.word.length) return;
     // create a new event for `change` of progress bar
     w.onChange = new Event("change");
     // map chunks from the word
