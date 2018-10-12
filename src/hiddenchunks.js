@@ -4,7 +4,6 @@
   let words = Array.from(document.getElementsByClassName("hiddenchunks"));
   words.forEach(word => new HiddenChunks(word));
 
-
   /**
    * HiddenChunks() is the main constructor method
    *
@@ -29,6 +28,12 @@
     w.el.show = __show.bind(w.el);
     w.el.hide = __hide.bind(w.el);
 
+    /**
+     * present() shows or hides hidden chunks depending on value of `showHidden`
+     *
+     * @param showHidden bool
+     * @return void
+     */
     function present(showHidden) {
       for (let i in w.map) if (w.map[ i ].hide === true) {
         if (showHidden === true) {
@@ -43,6 +48,12 @@
       w.el.dispatchEvent(w.onChange);
     }
 
+    /**
+     * __show() is the method exposed to the element to show hidden chunks
+     *
+     * @param fn callback
+     * @return void
+     */
     function __show(callback) {
       present(true);
       if (typeof callback === "function") {
@@ -50,6 +61,12 @@
       }
     }
 
+    /**
+     * __hide() is the method exposed to the element to hide hidden chunks
+     *
+     * @param fn callback
+     * @return void
+     */
     function __hide(callback) {
       present(false);
       if (typeof callback === "function") {
@@ -57,6 +74,11 @@
       }
     }
 
+    /**
+     * initWord() iterates the `map` object to generate HTML for each chunk
+     *
+     * @return void
+     */
     function initWord() {
       w.el.innerHTML = "";
       for (let i in w.map) {
@@ -68,6 +90,12 @@
       present(false);
     }
 
+    /**
+     * generateChunk() generates HTML for each chunk
+     *
+     * @param object chunk
+     * @return object span
+     */
     function generateChunk(chunk) {
       let span = document.createElement("SPAN");
       span.className = "hiddenchunks__chunk";
@@ -75,6 +103,14 @@
       return span;
     }
 
+
+    /**
+     * mapWord() parses the map provided (either by `data-map` or `innerHTML`)
+     * and splits into chunks with a prop to say if the chunk should be hidden
+     *
+     * @param object chunk
+     * @return object span
+     */
     function mapWord() {
       let m, r = /(\[.*?\])/g, sliceMap = [0];
       while ((m = r.exec(w.word)) !== null) {
