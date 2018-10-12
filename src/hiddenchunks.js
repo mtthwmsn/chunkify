@@ -98,7 +98,8 @@
      */
     function generateChunk(i) {
       let span = document.createElement("SPAN");
-      span.className = "hiddenchunks__chunk hiddenchunks__chunk-index-"+i;
+      span.className = "hiddenchunks__chunk";
+      span.dataset.index = i;
       span.innerHTML = (w.map[ i ].chunk === " " ? "&nbsp;" : w.map[ i ].chunk);
       return span;
     }
