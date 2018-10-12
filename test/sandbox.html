@@ -4,22 +4,14 @@
 	<meta charset="utf-8">
 	<title>Hidden Chunks</title>
 	<style>
-		body {
-			background: #EFEFEF;
+		.hiddenchunks {
+
 		}
-		.progressbar {
-			padding: 0;
-			margin: 0;
-			list-style: none;
-			width: 100%;
-			display: flex;
-			justify-content: space-between;
+		.hiddenchunks__chunk {
+
 		}
-		.progressbar__item {
-			background: #f99;
-		}
-		.progressbar__item[data-active] {
-			background: #F00;
+		.hiddenchunks__chunk--hidden {
+			display: none;
 		}
 	</style>
 </head>
@@ -32,6 +24,7 @@
 	<script src="../src/hiddenchunks.js"></script>
 	<script>
 		var hiddenchunks = document.getElementById("hiddenchunks");
+		hiddenchunks.addEventListener("change", () => { console.log("changed") });
 		document.getElementById('show').addEventListener('click', hiddenchunks.show);
 		document.getElementById('hide').addEventListener('click', hiddenchunks.hide);
 	</script>

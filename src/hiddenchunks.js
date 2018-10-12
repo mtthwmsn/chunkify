@@ -21,20 +21,43 @@
       console.warn("HiddenChunks: `data-map` must be provided");
       return;
     }
+    // create a new event for `change` of progress bar
+    w.onChange = new Event("change");
+    // map chunks from the word
     mapWord();
+    // generate HTML
     generateWord();
     // bind and expose methods to the word
     //   usage: `document.getElementById('hiddenchunks').show();`
     w.el.show = __show.bind(w.el);
     w.el.hide = __hide.bind(w.el);
 
-
-    function __show() {
-      console.log('show', w.map);
+    function present(showHidden) {
+      for (let i in w.map) if (w.map[ i ].hide === true) {
+        if (showHidden === true) {
+          w.map[ i ].el.classList.remove("hiddenchunks__chunk--hidden");
+          w.map[ i ].isHidden = false;
+        }
+        else {
+          w.map[ i ].el.classList.add("hiddenchunks__chunk--hidden");
+          w.map[ i ].isHidden = true;
+        }
+      }
+      w.el.dispatchEvent(w.onChange);
     }
 
-    function __hide() {
-      console.log('hide', w.map);
+    function __show(callback) {
+      present(true);
+      if (typeof callback === "function") {
+        callback(w);
+      }
+    }
+
+    function __hide(callback) {
+      present(false);
+      if (typeof callback === "function") {
+        callback(w);
+      }
     }
 
     function generateWord() {
@@ -48,7 +71,7 @@
 
     function generateChunk(chunk, hide) {
       let span = document.createElement("SPAN");
-      span.className = "wordart__char"+(hide ? " wordart__char--hidden": "");
+      span.className = "hiddenchunks__chunk"+(hide ? " hiddenchunks__chunk--hidden": "");
       span.innerHTML = (chunk === " " ? "&nbsp;" : chunk);
       return span;
     }
@@ -64,8 +87,9 @@
       while (sliceMap.length > 1) {
         let chunk = w.word.substring(sliceMap[0], sliceMap[1]);
         w.map[ Object.keys(w.map).length ] = {
-          "chunk": chunk.replace(/\[|\]/g, ""),
-          "hide": !!chunk.match(/\[|\]/g)
+          "chunk"    : chunk.replace(/\[|\]/g, ""),
+          "hide"     : !!chunk.match(/\[|\]/g),
+          "isHidden" : !!chunk.match(/\[|\]/g)
         };
         sliceMap.shift();
       }
