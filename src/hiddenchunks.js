@@ -22,8 +22,8 @@
     w.onChange = new Event("change");
     // map chunks from the word
     mapWord();
-    // generate HTML
-    generateWord();
+    // generate HTML and initialise
+    initWord();
     // bind and expose methods to the word
     //   usage: `document.getElementById('hiddenchunks').show();`
     w.el.show = __show.bind(w.el);
@@ -57,18 +57,20 @@
       }
     }
 
-    function generateWord() {
+    function initWord() {
       w.el.innerHTML = "";
       for (let i in w.map) {
-        let chunk = generateChunk(w.map[ i ].chunk, w.map[ i ].hide);
+        let chunk = generateChunk(w.map[ i ].chunk);
         w.map[ i ].el = chunk;
         w.el.append(chunk);
       }
+      // present word with hidden chunks
+      present(false);
     }
 
-    function generateChunk(chunk, hide) {
+    function generateChunk(chunk) {
       let span = document.createElement("SPAN");
-      span.className = "hiddenchunks__chunk"+(hide ? " hiddenchunks__chunk--hidden": "");
+      span.className = "hiddenchunks__chunk";
       span.innerHTML = (chunk === " " ? "&nbsp;" : chunk);
       return span;
     }
@@ -85,8 +87,7 @@
         let chunk = w.word.substring(sliceMap[0], sliceMap[1]);
         w.map[ Object.keys(w.map).length ] = {
           "chunk"    : chunk.replace(/\[|\]/g, ""),
-          "hide"     : !!chunk.match(/\[|\]/g),
-          "isHidden" : !!chunk.match(/\[|\]/g)
+          "hide"     : !!chunk.match(/\[|\]/g)
         };
         sliceMap.shift();
       }
