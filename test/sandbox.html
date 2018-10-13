@@ -4,29 +4,21 @@
 	<meta charset="utf-8">
 	<title>Hidden Chunks</title>
 	<style>
-		.hiddenchunks {
+		.chunkify {
 
 		}
-		.hiddenchunks__chunk {
+		.chunkify__chunk {
 
 		}
-		.hiddenchunks__chunk--hidden {
+		.chunkify__chunk--hidden {
 			display: none;
 		}
 	</style>
 </head>
 <body>
 
-	<h1 class="hiddenchunks" id="hiddenchunks" data-map="H[i]dd[e]n[ ]Ch[u]nks">...</h1>
-	<button id="show">Show</button>
-	<button id="hide">Hide</button>
+	<h1 class="chunkify" data-map="H[i]dd[e]n[ ]Ch[u]nks" data-parenthesised-class="hidden">...</h1>
 
-	<script src="../src/hiddenchunks.js"></script>
-	<script>
-		var hiddenchunks = document.getElementById("hiddenchunks");
-		hiddenchunks.addEventListener("change", () => { console.log("changed") });
-		document.getElementById('show').addEventListener('click', hiddenchunks.show);
-		document.getElementById('hide').addEventListener('click', hiddenchunks.hide);
-	</script>
+	<script src="../src/chunkify.min.js"></script>
 </body>
 </html>
