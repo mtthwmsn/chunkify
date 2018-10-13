@@ -14,13 +14,17 @@ Chunks can be defined either in the HTML of the element or using `data-map`
 ```
 *The above generates the following chunks:*
 
-- `<span class="chunkify__chunk">H</span>`
-- `<span class="chunkify__chunk">e</span>`
-- `<span class="chunkify__chunk">ll</span>`
-- `<span class="chunkify__chunk">o </span>`
-- `<span class="chunkify__chunk">W</span>`
-- `<span class="chunkify__chunk">o</span>`
-- `<span class="chunkify__chunk">rld</span>`
+```html
+<h1 class="chunkify">
+  <span class="chunkify__chunk">H</span>
+  <span class="chunkify__chunk">e</span>
+  <span class="chunkify__chunk">ll</span>
+  <span class="chunkify__chunk">o </span>
+  <span class="chunkify__chunk">W</span>
+  <span class="chunkify__chunk">o</span>
+  <span class="chunkify__chunk">rld</span>
+</h1>
+```
 
 ## `data-map`
 
@@ -51,14 +55,17 @@ This dataset attribute allows you to define a class (*applied as
 ```
 *The above code will generate chunks as follows:*
 
-- `<span class="chunkify__chunk">H</span>`
-- `<span class="chunkify__chunk chunkify__chunk--hidden">e</span>`
-- `<span class="chunkify__chunk">ll</span>`
-- `<span class="chunkify__chunk chunkify__chunk--hidden">o </span>`
-- `<span class="chunkify__chunk">W</span>`
-- `<span class="chunkify__chunk chunkify__chunk--hidden">o</span>`
-- `<span class="chunkify__chunk">rld</span>`
-
+```html
+<h1 class="chunkify" data-map="H[e]ll[o ]W[o]rld" data-parenthesised-class="hidden">
+  <span class="chunkify__chunk">H</span>
+  <span class="chunkify__chunk chunkify__chunk--hidden">e</span>
+  <span class="chunkify__chunk">ll</span>
+  <span class="chunkify__chunk chunkify__chunk--hidden">o </span>
+  <span class="chunkify__chunk">W</span>
+  <span class="chunkify__chunk chunkify__chunk--hidden">o</span>
+  <span class="chunkify__chunk">rld</span>
+</h1>
+```
 
 *Displaying in the following format:*
 
