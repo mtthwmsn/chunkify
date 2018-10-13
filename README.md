@@ -14,13 +14,13 @@ Chunks can be defined either in the HTML of the element or using `data-map`
 ```
 *The above generates the following chunks:*
 
-- `H`
-- `e`
-- `ll`
-- `o `
-- `W`
-- `o`
-- `rld`
+- `<span class="chunkify__chunk">H</span>`
+- `<span class="chunkify__chunk">e</span>`
+- `<span class="chunkify__chunk">ll</span>`
+- `<span class="chunkify__chunk">o </span>`
+- `<span class="chunkify__chunk">W</span>`
+- `<span class="chunkify__chunk">o</span>`
+- `<span class="chunkify__chunk">rld</span>`
 
 ## `data-map`
 
@@ -49,7 +49,17 @@ This dataset attribute allows you to define a class (*applied as
   display: none;
 }
 ```
-*The above code will hide all chunks wrapped in parenthesis, displaying in the
- following format:*
+*The above code will generate chunks as follows:*
+
+- `<span class="chunkify__chunk">H</span>`
+- `<span class="chunkify__chunk chunkify__chunk--hidden">e</span>`
+- `<span class="chunkify__chunk">ll</span>`
+- `<span class="chunkify__chunk chunkify__chunk--hidden">o </span>`
+- `<span class="chunkify__chunk">W</span>`
+- `<span class="chunkify__chunk chunkify__chunk--hidden">o</span>`
+- `<span class="chunkify__chunk">rld</span>`
+
+
+*Displaying in the following format:*
 
 - `HllWrld`
