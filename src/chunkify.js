@@ -1,16 +1,13 @@
 (function() {
   "use strict";
 
-  let words = Array.from(document.getElementsByClassName("chunkify"));
-  words.forEach(word => new Chunkify(word));
-
   /**
    * Chunkify() is the main constructor method
    *
    * @param object el
    * @return bool false if no word to chunkify
    */
-  function Chunkify(el) {
+  window.Chunkify = function(el) {
     var w = {};
     w.el = el;
     w.word = (w.el.dataset.map||w.el.innerHTML).trim();
@@ -80,5 +77,9 @@
         sliceMap.shift();
       }
     }
-  }
+  };
+
+  // immediately invoke Chunkify for all elements with 'chunkify' class
+  let words = Array.from(document.getElementsByClassName("chunkify"));
+  words.forEach(word => new Chunkify(word));
 })();
