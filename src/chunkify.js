@@ -21,6 +21,8 @@
     mapWord();
     // generate HTML and initialise
     initWord();
+    // return word object
+    return w;
 
     /**
      * initWord() iterates the `map` object to generate HTML for each chunk
